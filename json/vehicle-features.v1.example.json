@@ -1,0 +1,57 @@
+{
+  "vehicle": [
+    {
+      "id": "VIN1",
+      "features": [
+        {
+          "feature": "ENGINE",
+          "description": {
+            "short": "5.2 Liter V8"
+          }
+        },
+        {
+          "feature": "RIM",
+          "description": {
+            "short": "19\" Felgen"
+          }
+        },
+        {
+          "feature": "SERVICE",
+          "description": {
+            "short": "Service bei 120.000 km"
+          }
+        },
+        {
+          "feature": "INFO",
+          "description": {
+            "short": "Top Zustand",
+            "long": "Kein Kratzer im Lack, Scheckheftgepflegt, Garagenwagen, von ner alten Oma gefahren"
+          }
+        }
+      ]
+    },
+    {
+      "id": "VIN2",
+      "features": [
+        {
+          "feature": "ENGINE",
+          "description": {
+            "short": "1.8 Liter V6"
+          }
+        },
+        {
+          "feature": "WHEEL",
+          "description": {
+            "short": "Pirelli P7"
+          }
+        },
+        {
+          "feature": "SERVICE",
+          "description": {
+            "short": "Service bei 80.000 km"
+          }
+        }
+      ]
+    }
+  ]
+}
