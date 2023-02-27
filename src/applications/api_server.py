@@ -2,7 +2,7 @@ import click
 from flask import Flask
 from flask_cors import CORS
 
-from core.challenge import api as backend_challenge_api
+from core.challenge_api import api as backend_challenge_api
 
 
 @click.group(name="api-server")

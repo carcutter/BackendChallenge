@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response
 from utils.api_decorators import ApiDecorators
 
-api = Blueprint("flutter_api", __name__)
+api = Blueprint("challenge_api", __name__)
 
 
 @api.route("/challenge", methods=["POST"])
