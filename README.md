@@ -9,7 +9,11 @@ Task
 ... which accepts json data from our customers and store certain parts of it to the filesystem.</br>
 Since this is a pretty simple task, we want you to think of best practices, edge cases and good software engineering.
 
-Please fork our repo and implement the challenge in `src/core/challenge.py`.</br>
+Please fork our repo and implement the challenge in `src/core/challenge_api.py`.
+
+Customers will post some json data to this api route, and we want to store each `Vehicle` in the `Vehicle-List` to a single file.
+This file should be stored to a folder named like the `user_id` and the filename should be the `id` with a ".json" extension.
+
 Once you are done, just create a pull request to `base:develop`. Please leave a comment what you think about the task and how long it took you to finish.
 
 Run It
