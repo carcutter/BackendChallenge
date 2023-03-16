@@ -39,7 +39,7 @@ def vehicle_features_post(user_id: str):
     This file should be stored to a folder named like the `user_id` and the filename should be the `id` with a ".json" extension.
 
     :param user_id: The id of the customer sending the request
-    :return: Dict of vehicle file(s) created/updated
+    :return: 201 CREATED
 
     """
     # I added this parent folder to make it clearer where are the stored folders
