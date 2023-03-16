@@ -13,3 +13,5 @@ __pycache__/
 .vscode/*.log
 
 nohup.out
+src/core/stored_vehicles_per_user_id
+Markus-comments.md

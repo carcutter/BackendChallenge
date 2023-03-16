@@ -6,6 +6,9 @@ click
 flask<=2.1.3
 flask_cors
 
+# Validate Python data structures
+flask-json-schema
+
 # Test Dependencies
 mock
 coverage

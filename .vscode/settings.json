@@ -1,5 +1,12 @@
 {
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--line-length", "140"],
-    "python.linting.enabled": true
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "140"
+    ],
+    "python.linting.enabled": true,
+    "python.pythonPath": "venv/bin/python3",
+    "python.analysis.extraPaths": [
+        "./src"
+    ]
 }
