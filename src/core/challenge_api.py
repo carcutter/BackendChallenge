@@ -48,22 +48,23 @@ def vehicle_features_post(user_id: str):
         os.makedirs(STORED_VEHICLES_FOLDER)
 
     # message contains files and status of file "Updated" or "Created"
-    return_message = {}
+    log_message = {}
     data = request.get_json()
-    app.logger.info("%d number of vehicles", len(data["vehicles"]))
+    app.logger.info("%d number of vehicle", len(data["vehicles"]))
 
     for vehicle in data["vehicles"]:
         # best practice not to trust client
         secure_vehicle_id = secure_filename(f'{vehicle["id"]}.json')
         vehicle_file_name = os.path.join(STORED_VEHICLES_FOLDER, secure_vehicle_id)
         if os.path.exists(vehicle_file_name):
-            return_message[vehicle_file_name] = "Updated"
+            log_message[vehicle["id"]] = {"filename": vehicle_file_name, "status": "Updated"}
         else:
-            return_message[vehicle_file_name] = "Created"
+            log_message[vehicle["id"]] = {"filename": vehicle_file_name, "status": "Created"}
         # if we were certain that the ids are unique, we could use multithreading for io task in parallel
         save_vehicle_to_json_file(vehicle_file_name, vehicle)
 
-    app.logger.info("%d number of vehicles with unique id: ", len(return_message))
-
-    response = app.response_class(response=json.dumps(return_message), status=201, mimetype="application/json")
+    app.logger.info("%d number of vehicles with unique id: ", len(log_message))
+    app.logger.info(log_message)
+    message = {"message": "The item(s) was created successfully"}
+    response = app.response_class(response=json.dumps(message), status=201, mimetype="application/json")
     return response
