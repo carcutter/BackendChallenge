@@ -12,3 +12,6 @@ coverage
 moto
 pytest
 pyfakefs
+
+# Added dependencies
+flask-expects-json
