@@ -9,3 +9,11 @@ unit-test:
 .PHONY: coverage
 coverage: unit-test
 	coverage report
+
+.PHONY: py-version
+py-version:
+	python --version
+
+.PHONY: api-run
+api-run:
+	python src/cli.py api-server vehicle-features
