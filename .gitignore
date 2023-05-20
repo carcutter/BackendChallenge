@@ -13,3 +13,6 @@ __pycache__/
 .vscode/*.log
 
 nohup.out
+
+vehicles_data/
+vehicles_data_test/
