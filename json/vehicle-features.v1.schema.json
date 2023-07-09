@@ -19,7 +19,8 @@
         "properties": {
           "id": {
             "description": "A unique identifier of the vehicle (often the VIN)",
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "features": {
             "title": "Feature-List",
@@ -35,7 +36,8 @@
                 "feature": {
                   "title": "Feature Identifier",
                   "description": "A unique identifier/key/name for a feature",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 1
                 },
                 "description": {
                   "title": "Description",
