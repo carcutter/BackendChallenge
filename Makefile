@@ -10,6 +10,10 @@ genmodels:
 unit-test: genmodels
 	coverage run -m pytest tests/unit/ -W error::UserWarning --capture=no
 
+.PHONY: integration-test
+integration-test: genmodels
+	coverage run -m pytest tests/integration/ -W error::UserWarning --capture=no
+
 .PHONY: coverage
-coverage: unit-test
+coverage: unit-test integration-test
 	coverage report
