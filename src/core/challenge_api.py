@@ -1,12 +1,14 @@
 from flask import Blueprint, make_response
 from utils.api_decorators import ApiDecorators
+from core.value_objects import CustomerId
 
 api = Blueprint("challenge_api", __name__)
 
+from flask import current_app
 
-@api.route("/challenge", methods=["POST"])
+@api.route("/challenge/<customer_id>", methods=["POST"])
 @ApiDecorators.require_customer_id
-def vehicle_features_post(user_id: str):
+def vehicle_features_post(customer_id: CustomerId):
     """
     Please see the README.md
     Also see `json/vehicle-features.v1.schema.json` and `json/vehicle-features.v1.example.json`
@@ -17,6 +19,8 @@ def vehicle_features_post(user_id: str):
     :param user_id: The id of the customer sending the request
     :return: ???
     """
+
+    current_app.logger.info(f"REQ: {customer_id}")
 
     # TODO Implement the challenge
 
