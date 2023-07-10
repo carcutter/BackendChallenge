@@ -4,7 +4,7 @@ format:
 
 .PHONY: genmodels
 genmodels:
-	python tools/genmodels.py --schema json/vehicle-features.v1.schema.json  --class VehicleList --file vehicle_list
+	python tools/genmodels.py --schema json/vehicle-features.v1.schema.json  --class GeneratedVehicleList --file generated_vehicle_list
 
 .PHONY: unit-test
 unit-test: genmodels

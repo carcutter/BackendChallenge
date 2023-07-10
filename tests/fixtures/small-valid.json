@@ -1,0 +1,32 @@
+{
+  "vehicles": [
+    {
+      "id": "5GZCZ43D13S812715",
+      "features": [
+        {
+          "feature": "ENGINE",
+          "description": {
+            "short": "5.2 Liter V8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "WP0ZZZ99ZTS392124",
+      "features": [
+        {
+          "feature": "ENGINE",
+          "description": {
+            "short": "1.8 Liter V6"
+          }
+        },
+        {
+          "feature": "WHEEL",
+          "description": {
+            "short": "Pirelli P7"
+          }
+        }
+      ]
+    }
+  ]
+}
