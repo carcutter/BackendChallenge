@@ -1,8 +1,24 @@
 import click
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_json_schema import JsonValidationError
+
 
 from core.challenge_api import api as backend_challenge_api
+from utils.schema import schema
+
+
+def get_app():
+    app = Flask("Backend Challenge API")
+    schema.init_app(app)
+    CORS(app)
+    app.register_blueprint(backend_challenge_api, url_prefix="/backend")
+
+    @app.errorhandler(JsonValidationError)
+    def validation_error(e):
+        return jsonify({"error": e.message, "errors": [validation_error.message for validation_error in e.errors]}), 400
+
+    return app
 
 
 @click.group(name="api-server")
@@ -35,7 +51,5 @@ def vehicle_features(host: str, port: int):
         host: The hostname to listen on.
         port: The port of the webserver.
     """
-    app = Flask("Backend Challenge API")
-    CORS(app)
-    app.register_blueprint(backend_challenge_api, url_prefix="/backend")
+    app = get_app()
     app.run(host=host, port=port, debug=True)
