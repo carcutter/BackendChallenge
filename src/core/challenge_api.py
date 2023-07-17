@@ -1,11 +1,16 @@
-from flask import Blueprint, make_response
+from flask import Blueprint, make_response, request, abort
 from utils.api_decorators import ApiDecorators
 from core.value_objects import CustomerId
-
-api = Blueprint("challenge_api", __name__)
+from core.vehicle_list import VehicleList
 
 from flask import current_app
 
+
+api = Blueprint("challenge_api", __name__)
+
+
+# TODO: could use werkzeug custom converters here
+# TODO: POST, PUT, PATCH - one or more, depending on the business case/rules
 @api.route("/challenge/<customer_id>", methods=["POST"])
 @ApiDecorators.require_customer_id
 def vehicle_features_post(customer_id: CustomerId):
@@ -19,8 +24,14 @@ def vehicle_features_post(customer_id: CustomerId):
     :param user_id: The id of the customer sending the request
     :return: ???
     """
+    raw_json = request.json
 
-    current_app.logger.info(f"REQ: {customer_id}")
+    try:
+        vehicle_list = VehicleList(raw_json)
+    except:
+        return abort(500)
+
+    current_app.logger.info(f"REQ: {raw_json}")
 
     # TODO Implement the challenge
 
