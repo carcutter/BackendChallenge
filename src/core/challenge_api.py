@@ -1,6 +1,6 @@
 from flask import Blueprint, make_response, request, abort
-from utils.api_decorators import ApiDecorators
 from core.value_objects import CustomerId
+from utils.api_decorators import ApiDecorators
 from core.vehicle_list import VehicleList
 
 from flask import current_app
@@ -30,6 +30,10 @@ def vehicle_features_post(customer_id: CustomerId):
         vehicle_list = VehicleList(raw_json)
     except:
         return abort(500)
+
+    customer = customer_id.getCustomer()
+    storage = customer.getStorage()
+    storage.saveVehicleList(vehicle_list)
 
     current_app.logger.info(f"REQ: {raw_json}")
 
