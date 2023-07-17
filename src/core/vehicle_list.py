@@ -2,7 +2,7 @@ from utils.generated_vehicle_list import GeneratedVehicleList
 
 
 class VehicleList(GeneratedVehicleList):
-    class VehiclesProperty (GeneratedVehicleList.VehiclesProperty):
+    class VehiclesProperty(GeneratedVehicleList.VehiclesProperty):
         class Item(GeneratedVehicleList.VehiclesProperty.Item):
             class IdProperty(GeneratedVehicleList.VehiclesProperty.Item.IdProperty):
                 @staticmethod
