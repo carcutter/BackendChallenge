@@ -1,8 +1,17 @@
 import json
 import pytest
+from pyfakefs.fake_filesystem_unittest import Patcher
 from flask import Flask
 from flask_cors import CORS
 from src.core.challenge_api import api as backend_challenge_api
+
+
+@pytest.fixture(autouse=False)
+def before_and_after_test():
+    patcher = Patcher()
+    patcher.setUp()
+    yield
+    patcher.tearDown()
 
 
 @pytest.fixture
@@ -39,7 +48,7 @@ def create_failures():
         # TODO: add finalizer to tear down the app
 
 
-def test_successes(create_successes):
+def test_successes(create_successes, before_and_after_test):
     (app, json_fixture, code, customer_id, exception) = create_successes
     with app.test_client() as client:
         # TODO: get url from app
@@ -47,7 +56,7 @@ def test_successes(create_successes):
         assert resp.status_code == code
 
 
-def test_failures(create_failures):
+def test_failures(create_failures, before_and_after_test):
     (app, json_fixture, code, customer_id, exception) = create_failures
     with app.test_client() as client:
         # TODO: get url from app
