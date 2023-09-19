@@ -1,4 +1,6 @@
-from flask import Blueprint, make_response
+from flask import Blueprint, make_response, request, jsonify
+import json
+import os
 from utils.api_decorators import ApiDecorators
 
 api = Blueprint("challenge_api", __name__)
@@ -7,17 +9,39 @@ api = Blueprint("challenge_api", __name__)
 @api.route("/challenge", methods=["POST"])
 @ApiDecorators.require_customer_id
 def vehicle_features_post(user_id: str):
-    """
-    Please see the README.md
-    Also see `json/vehicle-features.v1.schema.json` and `json/vehicle-features.v1.example.json`
+    try:
+        data = None
 
-    Customers will post some json data to this route, and we want to store each `Vehicle` in the `Vehicle-List` to a single file.
-    This file should be stored to a folder named like the `user_id` and the filename should be the `id` with a ".json" extension.
+        # Handle 'application/json' content type
+        if request.content_type == "application/json":
+            data = request.get_json()
 
-    :param user_id: The id of the customer sending the request
-    :return: ???
-    """
+        # Handle 'multipart/form-data' content type
+        elif request.content_type.startswith("multipart/form-data"):
+            file_str = request.files["data"].read().decode("utf-8")
+            data = json.loads(file_str)
 
-    # TODO Implement the challenge
+        if data is None:
+            return make_response(jsonify({"error": f"Invalid content type: {request.content_type}"}), 400)
 
-    return make_response("OK", 200)
+        vehicles = data.get("vehicles")
+
+        if not vehicles:
+            return make_response(jsonify({"error": "Missing required field 'vehicles'"}), 400)
+
+        directory = f"./{user_id}"
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        for vehicle in vehicles:
+            vehicle_id = vehicle.get("id")
+            if not vehicle_id:
+                return make_response(jsonify({"error": "Vehicle id missing"}), 400)
+
+            with open(f"{directory}/{vehicle_id}.json", "w") as f:
+                json.dump(vehicle, f)
+
+        return make_response(jsonify({"success": True}), 200)
+
+    except Exception as e:
+        return make_response(jsonify({"error": str(e)}), 500)
