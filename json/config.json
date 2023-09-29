@@ -1,0 +1,5 @@
+{
+    "SCHEMA_PATH": "./json/vehicle-features.v1.schema.json",
+    "FILE_PATH": "./temp",
+    "MAX_LENGHT": -1
+}
